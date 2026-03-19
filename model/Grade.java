@@ -12,13 +12,6 @@ public class Grade {
         this.course = course;
         setMarksObtained(marksObtained);
     }
-
-    public void setMarksObtained(float marksObtained) {
-        if (marksObtained < 0 || marksObtained > 100) {
-            throw new IllegalArgumentException("Marks must be between 0 and 100.");
-        }
-        this.marksObtained = marksObtained;
-    }
     
     public void setMarksObtained(float marksObtained) {
         if (marksObtained < 0.0f || marksObtained > 100.0f)
