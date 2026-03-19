@@ -1,4 +1,4 @@
-package StudentGradeManager.model;
+package model;
 
 public class Course {
     private String courseName;

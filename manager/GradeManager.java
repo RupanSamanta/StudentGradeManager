@@ -1,72 +1,48 @@
-import StudentGradeManager.model.*;
-import java.util.*;
+package manager;
+
+import model.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
 
 public class GradeManager {
 
-    // ─── DATA STORAGE ───────────────────────────────────────────
-    private ArrayList<Student> students;
-    private ArrayList<Course> courses;
-    private ArrayList<Grade> grades;
-    private HashMap<String, Student> studentMap; // studentId → Student
+    private List<Student> students;
+    private List<Course> courses;
+    private List<Grade> grades;
+    private HashMap<String, Student> studentMap;
 
-    // ─── CONSTRUCTOR ────────────────────────────────────────────
     public GradeManager() {
-        // initialize all lists and map here
+        students = new ArrayList<>();
+        courses = new ArrayList<>();
+        grades = new ArrayList<>();
+        studentMap = new HashMap<>();
     }
 
-    // ─── STUDENT METHODS ────────────────────────────────────────
+    // STUDENT METHODS
     public void addStudent(Student student) {
-        // add to both ArrayList AND HashMap
+        if (studentMap.containsKey(student.getStudentId())) {
+            throw new IllegalArgumentException("Student with ID " + student.getStudentId() + " already exists.");
+        }
+        students.add(student);
+        studentMap.put(student.getStudentId(), student);
     }
 
     public Student findStudentById(String studentId) {
-        // use studentMap for fast lookup
-        // throw exception if not found
+        if (!studentMap.containsKey(studentId)) {
+            throw new IllegalArgumentException("Student with ID " + studentId + " not found.");
+        }
+        return studentMap.get(studentId);
     }
 
     public void printAllStudents() {
-        // loop ArrayList and print each student
+        for (Student student : students) {
+            System.out.println(student);
+        }
     }
 
     public void sortStudentsBySgpa() {
-        // use Comparator to sort students list by sgpa descending
-    }
-
-    // ─── COURSE METHODS ─────────────────────────────────────────
-    public void addCourse(Course course) {
-        // add to courses list
-        // throw exception if courseCode already exists
-    }
-
-    public Course findCourseByCode(String courseCode) {
-        // loop courses list and find matching courseCode
-        // throw exception if not found
-    }
-
-    public void printAllCourses() {
-        // loop and print each course
-    }
-
-    // ─── GRADE METHODS ──────────────────────────────────────────
-    public void addGrade(Grade grade) {
-        // add to grades list
-        // make sure same student+course combo doesn't exist already
-    }
-
-    public ArrayList<Grade> getGradesForStudent(String studentId) {
-        // find student by id
-        // loop grades and collect all grades matching that student
-        // return the result list
-    }
-
-    public ArrayList<Grade> getGradesForCourse(String courseCode) {
-        // find course by code
-        // loop grades and collect all grades matching that course
-        // return the result list
-    }
-
-    public void printGradesForStudent(String studentId) {
-        // call getGradesForStudent()
-        // loop and print each grade
+        students.sort(Comparator.comparingDouble(Student::getSgpa).reversed());
     }
 }

@@ -1,11 +1,11 @@
-package StudentGradeManager.model;
+package model;
 
 public class Grade {
 
-    Student student;
-    Course course;
-    float marksObtained;
-    String grade;
+    private Student student;
+    private Course course;
+    private float marksObtained;
+    private String grade;
 
     public Grade(Student student, Course course, float marksObtained) {
         this.student = student;
