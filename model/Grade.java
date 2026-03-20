@@ -29,5 +29,21 @@ public class Grade {
         if (marks >= 40) return "D";
         return "F";
     }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public float getMarksObtained() {
+        return marksObtained;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
 }
 
