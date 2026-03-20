@@ -1,11 +1,11 @@
-package StudentGradeManager.model;
+package model;
 
 public class Grade {
 
-    Student student;
-    Course course;
-    float marksObtained;
-    String grade;
+    private Student student;
+    private Course course;
+    private float marksObtained;
+    private String grade;
 
     public Grade(Student student, Course course, float marksObtained) {
         this.student = student;
@@ -28,6 +28,22 @@ public class Grade {
         if (marks >= 50) return "C";
         if (marks >= 40) return "D";
         return "F";
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public float getMarksObtained() {
+        return marksObtained;
+    }
+
+    public String getGrade() {
+        return grade;
     }
 }
 
