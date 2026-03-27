@@ -37,11 +37,13 @@ StudentGradeManager/
 | OOP (Encapsulation) | `Student`, `Course`, `Grade` model classes |
 | Getters / Setters | All model classes |
 | Input Validation | Setters with `IllegalArgumentException` |
-| `ArrayList` | Storing list of students and courses |
-| `HashMap` | Fast student lookup by ID |
-| `Comparator` | Sorting students by SGPA |
-| Generics | Collections and custom structures |
+| `List` interface | Declaration type for all collections |
+| `ArrayList` | Storing students, courses, grades |
+| `HashMap` | Fast O(1) student lookup by ID |
+| `Comparator` | Sorting students by SGPA descending |
+| Generics | Collections and return types |
 | `toString()` | Clean object representation |
+| Duplicate detection | `addStudent()`, `addCourse()`, `addGrade()` |
 
 ---
 
@@ -93,13 +95,32 @@ java -cp out StudentGradeManager.Main
 
 ---
 
+## ⚙️ Manager Class
+
+### `GradeManager`
+| Method | Description |
+|---|---|
+| `addStudent(Student)` | Adds student to list and HashMap, rejects duplicates |
+| `findStudentById(String)` | O(1) lookup via HashMap, throws if not found |
+| `printAllStudents()` | Prints all students in insertion order |
+| `sortStudentsBySgpa()` | Sorts list by SGPA descending using Comparator |
+| `addCourse(Course)` | Adds course, rejects duplicate course codes |
+| `findCourseByCode(String)` | Loops courses list, throws if not found |
+| `printAllCourses()` | Prints all courses |
+| `addGrade(Grade)` | Validates student+course exist, rejects duplicate combos |
+| `getGradesForStudent(String)` | Returns all grades for a given student ID |
+| `getGradesForCourse(String)` | Returns all grades for a given course code |
+| `printGradesForStudent(String)` | Prints formatted grades for a student |
+
+---
+
 ## 📈 Roadmap
 
 - [x] Student model with validation
 - [x] Course model
-- [ ] Grade model
-- [ ] GradeManager with ArrayList and HashMap
-- [ ] Sort students by SGPA
+- [x] Grade model
+- [x] GradeManager with ArrayList and HashMap
+- [x] Sort students by SGPA
 - [ ] Console menu interface
 
 ---
