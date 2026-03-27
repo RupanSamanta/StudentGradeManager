@@ -45,5 +45,14 @@ public class Grade {
     public String getGrade() {
         return grade;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s | %s | Marks: %.2f | Grade: %s",
+                student.getStudentId(),
+                course.getCourseCode(),
+                marksObtained,
+                grade);
+    }
 }
 

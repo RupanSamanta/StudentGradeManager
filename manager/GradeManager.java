@@ -130,4 +130,28 @@ public class GradeManager {
             System.out.println(grade.getCourse().getCourseName() + ": " + grade.getMarksObtained() + " (" + grade.getGrade() + ")");
         }
     }
+
+    public void printGradesForCourse(String courseCode) {
+        findCourseByCode(courseCode);
+        ArrayList<Grade> courseGrades = getGradesForCourse(courseCode);
+        if (courseGrades.isEmpty()) {
+            System.out.println("No grades found for course code " + courseCode);
+            return;
+        }
+        for (Grade grade : courseGrades) {
+            System.out.println(grade.getStudent().getFullName() + ": " + grade.getMarksObtained() + " (" + grade.getGrade() + ")");
+        }
+    }
+
+    public boolean hasStudents() {
+        return !students.isEmpty();
+    }
+
+    public boolean hasCourses() {
+        return !courses.isEmpty();
+    }
+
+    public boolean hasGrades() {
+        return !grades.isEmpty();
+    }
 }
