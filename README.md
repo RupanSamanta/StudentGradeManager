@@ -121,7 +121,7 @@ java -cp out StudentGradeManager.Main
 - [x] Grade model
 - [x] GradeManager with ArrayList and HashMap
 - [x] Sort students by SGPA
-- [ ] Console menu interface
+- [x] Console menu interface
 
 ---
 

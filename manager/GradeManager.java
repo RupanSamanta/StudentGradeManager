@@ -39,7 +39,6 @@ public class GradeManager {
     }
 
     public void printAllStudents() {
-        // sort students by last name, then first name
         for (Student student : students) {
             System.out.println(student);
         }
@@ -84,12 +83,30 @@ public class GradeManager {
         findCourseByCode(grade.getCourse().getCourseCode());
         for (Grade g : grades) {
             if (g.getStudent().getStudentId().equals(grade.getStudent().getStudentId()) &&
-                g.getCourse().getCourseCode().equals(grade.getCourse().getCourseCode())) {
+                    g.getCourse().getCourseCode().equals(grade.getCourse().getCourseCode())) {
                 throw new IllegalArgumentException("Grade for student " + grade.getStudent().getStudentId() +
                         " in course " + grade.getCourse().getCourseCode() + " already exists.");
             }
         }
         grades.add(grade);
+        calculateSgpaForStudent(grade.getStudent().getStudentId());
+    }
+
+    private void calculateSgpaForStudent(String studentId) {
+        ArrayList<Grade> studentGrades = getGradesForStudent(studentId);
+        if (studentGrades.isEmpty())
+            return;
+
+        float totalPoints = 0;
+        int totalCredits = 0;
+
+        for (Grade g : studentGrades) {
+            int credits = g.getCourse().getCredits();
+            totalPoints += g.getMarksObtained() * credits;
+            totalCredits += credits;
+        }
+
+        findStudentById(studentId).setSgpa(totalPoints / totalCredits);
     }
 
     public ArrayList<Grade> getGradesForStudent(String studentId) {
@@ -127,7 +144,33 @@ public class GradeManager {
             return;
         }
         for (Grade grade : studentGrades) {
-            System.out.println(grade.getCourse().getCourseName() + ": " + grade.getMarksObtained() + " (" + grade.getGrade() + ")");
+            System.out.println(grade.getCourse().getCourseName() + ": " + grade.getMarksObtained() + " ("
+                    + grade.getGrade() + ")");
         }
+    }
+
+    public void printGradesForCourse(String courseCode) {
+        findCourseByCode(courseCode);
+        ArrayList<Grade> courseGrades = getGradesForCourse(courseCode);
+        if (courseGrades.isEmpty()) {
+            System.out.println("No grades found for course code " + courseCode);
+            return;
+        }
+        for (Grade grade : courseGrades) {
+            System.out.println(
+                    grade.getStudent().getFullName() + ": " + grade.getMarksObtained() + " (" + grade.getGrade() + ")");
+        }
+    }
+
+    public boolean hasStudents() {
+        return !students.isEmpty();
+    }
+
+    public boolean hasCourses() {
+        return !courses.isEmpty();
+    }
+
+    public boolean hasGrades() {
+        return !grades.isEmpty();
     }
 }

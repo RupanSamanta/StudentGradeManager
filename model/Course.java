@@ -24,6 +24,10 @@ public class Course {
         return credits;
     }
 
+    public int getMaxStudents() {
+        return maxStudents;
+    }
+
     public void setCredit(int credits) {
         if (credits < 1 || credits > 5) {
             throw new IllegalArgumentException("Credits must be between 1 and 5.");

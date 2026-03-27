@@ -8,7 +8,7 @@ public class Student {
     private int semester;
     private float sgpa;
 
-    public Student(String firstName, String lastName, String studentId, int section, int semester, float sgpa) {
+    public Student(String firstName, String lastName, String studentId, int section, int semester) {
         if (section < 1)
             throw new IllegalArgumentException("Section must be at least 1");
 
@@ -17,7 +17,7 @@ public class Student {
         this.studentId = studentId;
         this.setSection(section);
         this.setSemester(semester);
-        this.setSgpa(sgpa);
+        this.sgpa = 0.0f;
     }
 
     public String getFirstName() {
